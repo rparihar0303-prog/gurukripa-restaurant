@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:5000/api";
+// API Base URL
+const BASE_URL = import.meta.env.VITE_API_URL || "https://gurukripa-restaurant.onrender.com/api";
+
 
 // ===== Customer: Order Place Karo =====
 export const createOrder = async (orderData) => {
@@ -8,6 +10,12 @@ export const createOrder = async (orderData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderData),
     });
+
+    if (!res.ok) {
+      console.error("❌ createOrder failed:", res.status);
+      return null;
+    }
+
     return await res.json();
   } catch (err) {
     console.error("❌ createOrder error:", err);
@@ -15,22 +23,26 @@ export const createOrder = async (orderData) => {
   }
 };
 
+
 // ===== Admin: Saare Orders Lo =====
 export const getOrders = async (token) => {
   try {
     const res = await fetch(`${BASE_URL}/orders`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
     if (!res.ok) {
       console.error("❌ getOrders failed:", res.status);
-      return [];  // ✅ null nahi, empty array
+      return [];
     }
+
     return await res.json();
   } catch (err) {
     console.error("❌ getOrders error:", err);
     return [];
   }
 };
+
 
 // ===== Admin: Order Status Update Karo =====
 export const updateOrderStatus = async (id, status, token) => {
@@ -43,10 +55,12 @@ export const updateOrderStatus = async (id, status, token) => {
       },
       body: JSON.stringify({ status }),
     });
+
     if (!res.ok) {
       console.error("❌ updateOrderStatus failed:", res.status);
       return null;
     }
+
     return await res.json();
   } catch (err) {
     console.error("❌ updateOrderStatus error:", err);
@@ -54,23 +68,26 @@ export const updateOrderStatus = async (id, status, token) => {
   }
 };
 
+
 // ===== Admin: Stats Lo =====
 export const getStats = async (token) => {
   try {
     const res = await fetch(`${BASE_URL}/orders/stats`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
     if (!res.ok) {
       console.error("❌ getStats failed:", res.status);
-      // ✅ Default stats return karo taki dashboard crash na ho
       return { total: 0, pending: 0, preparing: 0, delivered: 0, revenue: 0 };
     }
+
     return await res.json();
   } catch (err) {
     console.error("❌ getStats error:", err);
     return { total: 0, pending: 0, preparing: 0, delivered: 0, revenue: 0 };
   }
 };
+
 
 // ===== Admin: Login =====
 export const adminLogin = async (email, password) => {
@@ -80,6 +97,12 @@ export const adminLogin = async (email, password) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+
+    if (!res.ok) {
+      console.error("❌ adminLogin failed:", res.status);
+      return {};
+    }
+
     return await res.json();
   } catch (err) {
     console.error("❌ adminLogin error:", err);
@@ -87,16 +110,22 @@ export const adminLogin = async (email, password) => {
   }
 };
 
-// Analytics fetch
+
+// ===== Analytics Fetch =====
 export const getAnalytics = async (token) => {
   try {
     const res = await fetch(`${BASE_URL}/orders/analytics`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    if (!res.ok) return null;
+
+    if (!res.ok) {
+      console.error("❌ getAnalytics failed:", res.status);
+      return null;
+    }
+
     return await res.json();
   } catch (err) {
-    console.error("Analytics error:", err);
+    console.error("❌ Analytics error:", err);
     return null;
   }
 };
