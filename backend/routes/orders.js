@@ -94,7 +94,7 @@ router.post("/", async (req, res) => {
     const orderNumber = `GK-${String(count + 1).padStart(4, "0")}`;
     const order = new Order({ ...req.body, orderNumber });
     await order.save();
-    const whatsappNumber = "917314222202";
+    const whatsappNumber = "918871785707";
     const message = generateWhatsAppMessage(order);
     const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
     res.status(201).json({ ...order.toObject(), whatsappLink });
