@@ -3,25 +3,25 @@ const dishes = [
     name: "Dal Bafle Special Thali",
     price: "₹350",
     desc: "Our signature dish – authentic Rajasthani experience",
-    image: "https://images.unsplash.com/photo-1617196035154-1e2e66e2f7f0?q=80&w=1200"
+    image: "/DalBati.png"
   },
   {
     name: "Butter Paneer Malai",
     price: "₹280",
     desc: "Creamy, rich paneer in butter gravy",
-    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=1200"
+    image: "/PaneerButterMasala.jpg"
   },
   {
     name: "Dal Makhani",
     price: "₹220",
     desc: "Slow-cooked black lentils with butter",
-    image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?q=80&w=1200"
+    image: "/DalMakhani.jpg"
   },
   {
     name: "Guru Kripa Special Kofta",
     price: "₹290",
     desc: "Chef's special creation",
-    image: "https://images.unsplash.com/photo-1628294896516-2d0a1b0a52b7?q=80&w=1200"
+    image: "/MalaiKofta.jpg"
   }
 ];
 

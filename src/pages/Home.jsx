@@ -160,7 +160,7 @@ export default function Home() {
 
             <div className="flex-1 max-w-[200px] md:max-w-[320px] h-[170px] sm:h-[220px] md:h-[260px] rounded-2xl overflow-hidden shadow-lg">
               <img
-                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1200"
+                src="public/GK_Restaurant2.webp"
                 className="w-full h-full object-cover"
                 alt="Restaurant"
               />
@@ -168,9 +168,9 @@ export default function Home() {
 
             <div className="flex-1 max-w-[150px] md:max-w-[220px] h-[140px] sm:h-[190px] md:h-[230px] rounded-2xl overflow-hidden shadow-lg mb-4">
               <img
-                src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=1200"
+                src="public/GK_Restaurant.webp"
                 className="w-full h-full object-cover"
-                alt="Food"
+                alt="Restaurant"
               />
             </div>
 
