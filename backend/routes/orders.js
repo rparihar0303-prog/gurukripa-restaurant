@@ -6,22 +6,6 @@ const router = express.Router();
 
 const VALID_STATUSES = ["Pending", "Preparing", "Out for Delivery", "Delivered", "Cancelled"];
 
-const generateWhatsAppMessage = (order) => {
-  const items = order.items
-    .map((i) => `  • ${i.name} ×${i.qty} = ₹${i.price * i.qty}`)
-    .join("\n");
-  return encodeURIComponent(
-    `🍽️ *New Order - ${order.orderNumber}*\n\n` +
-    `👤 *Customer:* ${order.customer.name}\n` +
-    `📞 *Phone:* ${order.customer.phone}\n` +
-    `📦 *Type:* ${order.orderType === "delivery" ? "🚚 Delivery" : "🏪 Pickup"}\n` +
-    (order.customer.address ? `📍 *Address:* ${order.customer.address}\n` : "") +
-    `\n*Items:*\n${items}\n\n` +
-    `💰 *Total: ₹${order.totalPrice}*\n` +
-    `💳 *Payment:* ${order.paymentMethod === "cod" ? "Cash on Delivery" : "Online Paid"}`
-  );
-};
-
 // ✅ /stats — pehle
 router.get("/stats", verifyAdmin, async (req, res) => {
   try {
@@ -94,10 +78,7 @@ router.post("/", async (req, res) => {
     const orderNumber = `GK-${String(count + 1).padStart(4, "0")}`;
     const order = new Order({ ...req.body, orderNumber });
     await order.save();
-    const whatsappNumber = "918871785707";
-    const message = generateWhatsAppMessage(order);
-    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
-    res.status(201).json({ ...order.toObject(), whatsappLink });
+    res.status(201).json(order.toObject());
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
